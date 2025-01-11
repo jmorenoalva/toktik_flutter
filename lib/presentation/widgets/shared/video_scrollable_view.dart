@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toktik/domain/entities/video_post.dart';
+import 'package:toktik/presentation/widgets/shared/video_buttons.dart';
 
 class VideoScrollableView extends StatelessWidget {
 
@@ -12,13 +13,26 @@ class VideoScrollableView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
+    return PageView.builder(
       scrollDirection: Axis.vertical,
       physics: const BouncingScrollPhysics(),
-      children:[
-        Container( color: Colors.red),
-        Container( color: Colors.blue)
-      ],
+      itemCount: videos.length,
+      itemBuilder:(context, index){
+        final videoPost = videos[index];
+
+        return Stack(
+          children:[
+            //Video Player + gradientes
+
+            //Botones
+            Positioned(
+              bottom: 40,
+              right: 20,
+              child: VideoButtons(video: videoPost)
+            ),
+          ]
+        );
+      } ,
     );
   }
 }
